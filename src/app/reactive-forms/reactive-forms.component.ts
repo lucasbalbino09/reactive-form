@@ -10,7 +10,8 @@ export class ReactiveFormsComponent implements OnInit {
 
   public cadastroForm : FormGroup = this.formBuilder.group({
     firstName: ['',Validators.required],
-    lastName: ['']
+    lastName: ['', [Validators.required,Validators.minLength(5)]],
+    email: ['', [Validators.required,Validators.email]]
   })
 
   constructor(private formBuilder: FormBuilder) { }
@@ -18,9 +19,12 @@ export class ReactiveFormsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  submitForm() {   
-    console.log(this.cadastroForm.value.firstName);
-    console.log(this.cadastroForm.value.lastName);
+  submitForm() {  
+    if(this.cadastroForm.valid) {
+      console.log(this.cadastroForm.value);
+      console.log(this.cadastroForm.value.firstName);
+      console.log(this.cadastroForm.value.lastName);
+    }
   }
 
 }
